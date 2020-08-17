@@ -1,4 +1,8 @@
 # Dump Chrome Accounts
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/2c2432b7825b4d28abc084b3880f1a0f)](https://www.codacy.com/manual/ThomasThelen/dump-chrome-accounts?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ThomasThelen/dump-chrome-accounts&amp;utm_campaign=Badge_Grade)
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+
 Dumps accounts stored in Google Chrome to Dropbox or disk 
 
 ## Background
